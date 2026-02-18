@@ -126,14 +126,26 @@ export default defineConfig(({ mode }) => ({
           }
         ]
       },
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      includeAssets: ['favicon.ico', 'kph-icon.png', 'images/kph-icon.jpeg'],
       manifest: {
         name: 'Kalangara Paint House',
         short_name: 'KPH',
         description: 'Your trusted Asian Paints dealer in Kerala',
         theme_color: '#C4141E',
         background_color: '#ffffff',
-        display: 'standalone'
+        display: 'standalone',
+        icons: [
+          {
+            src: '/kph-icon.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/images/kph-icon.jpeg',
+            sizes: '512x512',
+            type: 'image/jpeg'
+          }
+        ]
       }
     })
   ].filter(Boolean),
