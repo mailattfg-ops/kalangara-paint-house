@@ -81,7 +81,7 @@ serve(async (req: Request) => {
             const res = await fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `${WATTI_BEARER_TOKEN.startsWith('Bearer ') ? '' : 'Bearer '}${WATTI_BEARER_TOKEN}`,
+                    'Authorization': WATTI_BEARER_TOKEN,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload),
