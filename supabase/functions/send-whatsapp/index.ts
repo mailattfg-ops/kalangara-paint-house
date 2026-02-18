@@ -13,7 +13,7 @@ serve(async (req: Request) => {
     }
 
     try {
-        const { name, phone, service, pdfUrl } = await req.json()
+        const { name, phone, service, pdfUrl, district } = await req.json()
 
         console.log("=== WhatsApp Function Called ===")
         console.log("Customer:", name)
@@ -30,8 +30,17 @@ serve(async (req: Request) => {
         const ADMIN_1_WHATSAPP = Deno.env.get('WATTI_ADMIN_1_WHATSAPP')
         const ADMIN_2_WHATSAPP = Deno.env.get('WATTI_ADMIN_2_WHATSAPP')
         
-        // IMPORTANT: This name must match exactly what you created in WATI
-        const TEMPLATE_NAME = 'admin_enquiry'
+        const TEMPLATE_NAME = 'admin_req'
+
+        const normalizedDistrict = (district || '').toString().trim().toLowerCase()
+        const allowedDistricts = ['alappuzha', 'alleppey', 'kottayam', 'pathanamthitta']
+        const shouldNotifyAdmin = allowedDistricts.includes(normalizedDistrict)
+
+        if (!shouldNotifyAdmin) {
+            return new Response(JSON.stringify({ success: true, skipped: true, reason: 'district_not_in_admin_region' }), {
+                headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            })
+        }
 
         if (!WATTI_BEARER_TOKEN) {
             throw new Error("Watti configuration missing in secrets.")

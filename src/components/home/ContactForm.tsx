@@ -222,9 +222,8 @@ const ContactForm = () => {
                 status: "New",
             });
 
-            // 4. Send WhatsApp via Edge Function (The Trigger)
             const { error: functionError } = await supabase.functions.invoke('send-whatsapp', {
-                body: { name: values.name, phone: values.phone, service: values.interestedIn, pdfUrl }
+                body: { name: values.name, phone: values.phone, service: values.interestedIn, pdfUrl, district: values.district }
             });
 
             if (functionError) {
