@@ -47,10 +47,7 @@ serve(async (req: Request) => {
         }
 
         const sendWattiMessage = async (to: string, label: string) => {
-            let formattedTo = to.trim()
-            if (!formattedTo.startsWith('+')) {
-                formattedTo = `+${formattedTo}`
-            }
+            const formattedTo = to.trim()
 
             // 1. Define the parameters mapping for the template body variables
             //    Variables in template: {{name}}, {{phone}}, {{service}}
@@ -79,7 +76,7 @@ serve(async (req: Request) => {
 
             const url = `${WATTI_API_ENDPOINT}/api/v1/sendTemplateMessage?whatsappNumber=${encodeURIComponent(formattedTo)}`
 
-            console.log(`Sending to ${label}...`)
+            console.log(`Sending to ${label} at ${formattedTo}...`)
             
             const res = await fetch(url, {
                 method: 'POST',
@@ -91,7 +88,8 @@ serve(async (req: Request) => {
             })
 
             const text = await res.text()
-            
+            console.log(`WATTI raw response for ${label}:`, res.status, text)
+
             let json = {}
             try {
                 json = JSON.parse(text)
@@ -99,13 +97,15 @@ serve(async (req: Request) => {
                 json = { raw: text }
             }
 
-            if (!res.ok) {
-                console.error(`Error sending to ${label}:`, text)
-                // Don't throw immediately so we can try the next admin
-                return { success: false, error: text }
+            const wattiSuccess = (json as any).result === true
+
+            if (!res.ok || !wattiSuccess) {
+                console.error(`Error sending to ${label}:`, { status: res.status, body: json })
+                return { success: false, status: res.status, body: json }
             }
-            
-            return { success: true, data: json }
+
+            console.log(`Successfully sent to ${label}`)
+            return { success: true, status: res.status, body: json }
         }
 
         const results = []
