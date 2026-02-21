@@ -45,7 +45,7 @@ const AboutSection = () => {
               <div className="aspect-[4/5] relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 z-10" />
                 <img
-                  src="/images/about_us_img.png"
+                  src="/images/about_us_img.webp"
                   alt="Kalangara Paint House Stock Display"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   loading="lazy"
@@ -57,7 +57,7 @@ const AboutSection = () => {
             </div>
 
             {/* Floating Royal Element */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 border-[1px] border-purple-200/60 rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite] hidden md:flex pointer-events-none">
+            <div className="absolute -top-10 -right-10 w-32 h-32 border-[1px] border-purple-200/60 rounded-full hidden md:flex items-center justify-center animate-[spin_10s_linear_infinite] pointer-events-none">
               <div className="w-2 h-2 bg-purple-400 rounded-full absolute top-0" />
               <div className="w-2 h-2 bg-purple-400 rounded-full absolute bottom-0" />
             </div>

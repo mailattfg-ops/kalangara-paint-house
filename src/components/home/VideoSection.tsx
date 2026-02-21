@@ -83,7 +83,7 @@ const VideoSection = () => {
                                 loop
                                 playsInline
                                 preload="auto"
-                                poster="/images/kph-shop-1.jpeg"
+                                poster="/images/kph-shop-1.webp"
                                 onCanPlay={() => {
                                     if (videoRef.current) {
                                         videoRef.current.play().catch(e => console.log("Play failed:", e));

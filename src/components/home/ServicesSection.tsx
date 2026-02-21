@@ -1,69 +1,70 @@
-import { ArrowRight, Paintbrush, ShieldCheck, Droplets, ArrowUpRight, Truck, Phone, Palette, PaintRoller, Building2, HardHat, ClipboardCheck, Wrench, Briefcase, Sparkles, Layers, Shield } from "lucide-react";
+import { ArrowRight, Paintbrush, ShieldCheck, Droplets, Truck, Palette, PaintRoller, Building2, HardHat, Wrench, Briefcase, Sparkles, Layers, Shield } from "lucide-react";
 import ShopGallerySection from "./ShopGallerySection";
+import { Service } from "@/types";
 
 const ServicesSection = () => {
-    const services = [
+    const services: Service[] = [
         {
             title: "Waterproofing Solutions",
             subtitle: "LEAK PROTECTION",
             description: "Advanced waterproofing for terraces & walls using top-tier emulsions and primers from Asian Paints, JSW, Berger, & Birla. Complete protection with specialized roof coatings, putty, and leak-proof solutions.",
-            image: "/images/waterproofing_solutions.png",
+            image: "/images/waterproofing_solutions.webp",
             icon: Droplets
         },
         {
             title: "Climate Protection Coatings",
             subtitle: "WEATHER SHIELD",
             description: "Advanced heat and weather-resistant coatings that safeguard buildings from extreme sunlight, rain, and temperature changes, improving durability and indoor comfort.",
-            image: "/images/climate_protection_coatings.png",
+            image: "/images/climate_protection_coatings.webp",
             icon: ShieldCheck
         },
         {
             title: "Wall Care & Surface Treatment",
             subtitle: "SMOOTH FINISH",
             description: "Premium surface preparation with Birla White & Vembanadu cements, plus Birla Putty. We utilize waterproof primers and polymers from Asian Paints, JSW, & Indigo for effective crack filling and damp treatment.",
-            image: "/images/wall_care_surface_treatment.png",
+            image: "/images/wall_care_surface_treatment.webp",
             icon: Paintbrush
         },
         {
             title: "Professional Painting Services",
             subtitle: "PREMIUM FINISH",
             description: "High-quality interior and exterior painting for residential, commercial, and industrial spaces using premium materials and skilled workmanship.",
-            image: "/images/professional_painting_services.png",
+            image: "/images/professional_painting_services.webp",
             icon: PaintRoller
         },
         {
             title: "Commercial & Bulk Painting",
             subtitle: "LARGE SCALE",
             description: "Specialized solutions for large-scale projects such as offices, factories, apartments, and housing societies with timely execution and consistent quality.",
-            image: "/images/commercial_bulk_painting.png",
+            image: "/images/commercial_bulk_painting.webp",
             icon: Building2
         },
         {
             title: "Paint Consultation",
             subtitle: "EXPERT GUIDANCE",
             description: "Expert guidance on color selection, finishes, material choice, and maintenance to help you achieve the perfect look and longlasting results. We have a colour studio to tint over 2,500 Asian Paints shades for customers to choose from.",
-            image: "/images/paint_consultation.png",
+            image: "/images/paint_consultation.webp",
             icon: Palette
         },
         {
             title: "Wood Polishing & Varnishing",
             subtitle: "WOOD CARE",
             description: "Enhance wooden surfaces with durable polishing and varnishing that protects against moisture, scratches, aging, and delivers a rich, lasting finish.",
-            image: "/images/services/wood_polishing.png",
+            image: "/images/services/wood_polishing.webp",
             icon: Sparkles
         },
         {
             title: "Floor Painting Solutions",
             subtitle: "DURABLE FLOORS",
             description: "Apply durable, slip-resistant floor coatings for homes, commercial, and industrial spaces, ensuring protection, easy maintenance, and long-lasting performance.",
-            image: "/images/services/floor_painting_solutions.png",
+            image: "/images/services/floor_painting_solutions.webp",
             icon: Layers
         },
         {
             title: "Epoxy Metal Painting",
             subtitle: "METAL PROTECTION",
             description: "Protect metal surfaces with epoxy coatings that resist rust, corrosion, chemicals, and wear while delivering a smooth, long-lasting professional finish.",
-            image: "/images/services/epoxy_metal_painting.png",
+            image: "/images/services/epoxy_metal_painting.webp",
             icon: Shield
         }
     ];
@@ -101,8 +102,30 @@ const ServicesSection = () => {
         }
     ];
 
+    // JSON-LD for Services
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": services.map((s, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": {
+                "@type": "Service",
+                "name": s.title,
+                "description": s.description,
+                "provider": {
+                    "@id": "https://kalangarapaints.com"
+                }
+            }
+        }))
+    };
+
     return (
         <section id="services" className="pt-12 md:pt-24 pb-0 bg-white relative overflow-hidden">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="container mx-auto px-4 relative z-10">
                 {/* Minimalist Heading Block */}
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20">

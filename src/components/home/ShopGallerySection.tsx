@@ -2,12 +2,12 @@ import { MapPin, ArrowUpRight } from "lucide-react";
 
 const ShopGallerySection = () => {
     const images = [
-        { src: "/images/kph-shop-1.jpeg", label: "Main Counter", category: "Service" },
-        { src: "/images/kph-shop-2.jpeg", label: "Texture Display", category: "Interior" },
-        { src: "/images/kph-shop-6.jpeg", label: "Store Front", category: "Exterior" },
-        { src: "/images/kph-shop-3.jpeg", label: "Color Studio", category: "Consultation" },
-        { src: "/images/kph-shop-5.jpeg", label: "Stock Aisle", category: "Inventory" },
-        { src: "/images/kph-shop-4.jpeg", label: "Product Range", category: "Selection" },
+        { src: "/images/kph-shop-1.webp", label: "Main Counter", category: "Service" },
+        { src: "/images/kph-shop-2.webp", label: "Texture Display", category: "Interior" },
+        { src: "/images/kph-shop-6.webp", label: "Store Front", category: "Exterior" },
+        { src: "/images/kph-shop-3.webp", label: "Color Studio", category: "Consultation" },
+        { src: "/images/kph-shop-5.webp", label: "Stock Aisle", category: "Inventory" },
+        { src: "/images/kph-shop-4.webp", label: "Product Range", category: "Selection" },
     ];
 
     // Create a seamless loop by duplicating the array

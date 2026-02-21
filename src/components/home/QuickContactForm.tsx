@@ -22,13 +22,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { 
-    Loader2, 
-    Upload, 
-    X, 
-    ArrowRight, 
-    Phone, 
-    MapPin 
+import {
+    Loader2,
+    Upload,
+    X,
+    ArrowRight,
+    Phone,
+    MapPin
 } from "lucide-react";
 import { DistrictSelect } from "@/components/ui/district-select";
 import { jsPDF } from "jspdf";
@@ -51,35 +51,35 @@ const processImageForPdf = (file: File): Promise<{ dataUrl: string; width: numbe
     return new Promise((resolve, reject) => {
         const img = new Image();
         const reader = new FileReader();
-        
+
         reader.onload = (e) => {
             img.src = e.target?.result as string;
         };
-        
+
         img.onload = () => {
             const canvas = document.createElement('canvas');
             // Keep original dimensions
             canvas.width = img.width;
             canvas.height = img.height;
-            
+
             const ctx = canvas.getContext('2d');
             if (!ctx) {
                 reject(new Error('Could not get canvas context'));
                 return;
             }
-            
+
             ctx.drawImage(img, 0, 0);
-            
+
             // Reduce quality to 0.7 (30% reduction), keep image/jpeg for compression
             const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-            
+
             resolve({
                 dataUrl,
                 width: img.width,
                 height: img.height
             });
         };
-        
+
         reader.onerror = (error) => reject(error);
         reader.readAsDataURL(file);
     });
@@ -154,10 +154,10 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
             doc.text(`Sq.Ft: ${values.sqft || "N/A"}`, 20, 80);
             doc.text("Project Details:", 20, 90);
             doc.text(values.projectDetails || "N/A", 20, 100, { maxWidth: 170 });
-            
+
             // Add Images to PDF
-            let yPos = 130; 
-            
+            let yPos = 130;
+
             if (imageFiles.length > 0) {
                 doc.addPage();
                 doc.text("Project Images:", 20, 20);
@@ -166,13 +166,13 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
                 for (const file of imageFiles) {
                     try {
                         const { dataUrl, width, height } = await processImageForPdf(file);
-                        const ext = 'JPEG'; 
-                        
+                        const ext = 'JPEG';
+
                         // Calculate dimensions to fit PDF width (170mm) while maintaining aspect ratio
                         const maxWidth = 170;
                         const ratio = width / height;
                         const pdfHeight = maxWidth / ratio;
-                        
+
                         // Check if we need a new page
                         if (yPos + pdfHeight > 280) {
                             doc.addPage();
@@ -194,7 +194,7 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
             const month = date.toLocaleString('default', { month: 'short' }).toLowerCase();
             const year = date.getFullYear();
             const pdfPath = `enquiry-pdfs/${sanitizedName}_enquiry_${day}${month}${year}.pdf`;
-            
+
             await supabase.storage.from("enquiry-pdfs").upload(pdfPath, pdfBlob, {
                 contentType: "application/pdf",
                 cacheControl: "3600",
@@ -205,12 +205,12 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
 
             // 3. Save to Database
             const { error: dbError } = await supabase.from("enquiries").insert({
-                name: values.name, 
-                phone: values.phone, 
+                name: values.name,
+                phone: values.phone,
                 email: values.email || null,
-                district: values.district, 
+                district: values.district,
                 interested_in: values.interestedIn,
-                sqft: values.sqft || null, 
+                sqft: values.sqft || null,
                 project_details: values.projectDetails || null,
                 image_urls: imageUrls,
                 pdf_url: pdfUrl,
@@ -266,7 +266,7 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
                 </div>
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="p-8 space-y-5">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-5">
                         <div className="grid grid-cols-2 gap-4">
                             <FormField control={form.control} name="name" render={({ field }) => (
                                 <FormItem>
@@ -324,8 +324,8 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
                                             "Floor Painting",
                                             "Epoxy Metal Painting",
                                             "Safe Paint Services"].map(s => (
-                                            <SelectItem key={s} value={s} className="rounded-none text-sm font-normal text-slate-700 cursor-pointer focus:bg-slate-900 focus:text-white">{s}</SelectItem>
-                                        ))}
+                                                <SelectItem key={s} value={s} className="rounded-none text-sm font-normal text-slate-700 cursor-pointer focus:bg-slate-900 focus:text-white">{s}</SelectItem>
+                                            ))}
                                     </SelectContent>
                                 </Select>
                                 <FormMessage className="text-[10px] text-red-500" />
@@ -355,9 +355,9 @@ export const QuickContactForm = ({ isHero = false }: QuickContactFormProps) => {
                             )}
                         </div>
 
-                        <Button 
-                            type="submit" 
-                            disabled={loading} 
+                        <Button
+                            type="submit"
+                            disabled={loading}
                             onClick={(e) => {
                                 // Prevent any default behavior that might cause a redirect
                                 // Though form handleSubmit usually handles this, we're being explicit as requested.

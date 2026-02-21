@@ -42,8 +42,12 @@ const Footer = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24 items-end">
                     <div className="space-y-6">
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-primary text-white flex items-center justify-center font-black text-xl tracking-tighter shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]">
-                                KPH
+                            <div className="w-12 h-12 bg-white p-1.5 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]">
+                                <img
+                                    src="/icons/icon.png"
+                                    alt="KPH Logo"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-3xl font-black tracking-tighter uppercase leading-none">The Paint House</span>

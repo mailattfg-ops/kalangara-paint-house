@@ -123,6 +123,8 @@ const Header = ({ forceWhite = false }: HeaderProps) => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2.5 rounded bg-slate-100 text-foreground hover:bg-slate-200 active:scale-95 transition-all"
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -132,6 +134,7 @@ const Header = ({ forceWhite = false }: HeaderProps) => {
 
       {/* Mobile Navigation Drawer */}
       <div
+        id="mobile-menu"
         className={`lg:hidden fixed left-0 right-0 bg-white border-t border-slate-100 shadow-2xl transition-all duration-300 overflow-hidden z-40 ${isMobileMenuOpen ? "max-h-[calc(100vh-60px)] opacity-100" : "max-h-0 opacity-0"
           }`}
         style={{ top: isScrolled ? '52px' : '60px' }}
