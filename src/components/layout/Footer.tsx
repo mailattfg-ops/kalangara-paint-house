@@ -195,8 +195,8 @@ const Footer = () => {
                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
                         © {new Date().getFullYear()} Kalangara Paint House
                     </p>
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
-                        Designed and Developed by <a href="https://www.thinkforgeglobal.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white transition-colors">Think Forge Global</a>
+                    <p className="text-[10px] text-slate-500 font-normal uppercase tracking-widest">
+                        Designed & Developed by <a href="https://www.thinkforgeglobal.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-white font-extrabold transition-all duration-300 tracking-wider hover:underline decoration-primary/50 underline-offset-4">Think Forge Global</a>
                     </p>
                 </div>
 
